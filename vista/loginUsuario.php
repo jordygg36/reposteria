@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Login</title>
+    <title>Login Vendedor</title>
     <link href="/reposteria/framework/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -19,16 +19,16 @@
                     <label class="form-label">Correo:</label>
                 </div>
                 <div class="col-md-10">
-                    <input class="form-control" type="email" name="txt_correo" minlength="16" maxlength="30" placeholder="Ingrese un correo">
+                    <input class="form-control" type="email" name="txt_correo" minlength="16" maxlength="30" placeholder="Ingrese un correo" required>
                 </div>                
             </div>     
             <!-- Campo de contraseña -->
             <div class="row">
                 <div class="col-md-2">
-                    <label class="form-label">Password:</label>
+                    <label class="form-label">Contraseña:</label>
                 </div>
                 <div class="col-md-10">
-                    <input class="form-control" type="password" name="txt_pass" minlength="4" maxlength="4" placeholder="Ingrese un pass">
+                    <input class="form-control" type="password" name="txt_pass" minlength="4" maxlength="16" placeholder="Ingrese la contraseña" required>
                 </div>                
             </div>  
             <hr>
@@ -46,9 +46,9 @@
             $email = $_POST["txt_correo"];
             $contrasena = $_POST["txt_pass"];
             
-            // Crear el objeto modelo y validar el usuario
-            $validacion = new modeloLoginUsuario();
-            $validacion->validar_usuario($email, $contrasena);
+            // Crear el objeto modelo y validar al vendedor
+            $validacion = new modeloLoginVendedor();
+            $validacion->validar_vendedor($email, $contrasena);
         }
     ?>
 

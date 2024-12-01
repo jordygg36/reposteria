@@ -66,11 +66,11 @@
 <body>
     <!-- Barra de navegación -->
     <div class="navbar">
-        <a href="#" class="logo">Repostería</a>
+        <a href="#" class="logo">Repostería(Administrador)</a>
         <div class="links">
-            <a href="../vista/inicioPrincipal.php">Inicio</a>
+            <a href="/reposteria/controlador/controladorPedido.php">Pedidos</a>
             <a href="/reposteria/controlador/controladorBuscarProducto.php">Menu</a>
-            <a href="/reposteria/controlador/controladorLoginVendedor.php">Iniciar secion</a>
+            <a href="/reposteria/controlador/controladorDetalleTicket.php">Iniciar secion</a>
         </div>
     </div>
 
