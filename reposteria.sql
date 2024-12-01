@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 01-12-2024 a las 02:07:02
+-- Servidor: localhost:3306
+-- Tiempo de generación: 01-12-2024 a las 19:11:37
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -112,6 +112,32 @@ INSERT INTO `descuento` (`ID_DESCUENTO`, `DESCUENTO`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `detalle_pedido`
+--
+
+CREATE TABLE `detalle_pedido` (
+  `ID_DETALLE_PEDIDO` int(11) NOT NULL,
+  `ID_PEDIDO` int(11) NOT NULL,
+  `ID_PRODUCTO` int(11) NOT NULL,
+  `CANTIDAD` int(11) NOT NULL,
+  `PRECIO_UNITARIO` decimal(10,2) NOT NULL,
+  `PRECIO_TOTAL` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `detalle_pedido`
+--
+
+INSERT INTO `detalle_pedido` (`ID_DETALLE_PEDIDO`, `ID_PEDIDO`, `ID_PRODUCTO`, `CANTIDAD`, `PRECIO_UNITARIO`, `PRECIO_TOTAL`) VALUES
+(1, 6, 4, 2, 46.00, 92.00),
+(2, 7, 6, 6, 10.00, 60.00),
+(3, 7, 10, 1, 20.00, 20.00),
+(4, 8, 1, 45, 2.00, 90.00),
+(5, 8, 7, 5, 44.00, 220.00);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `detalle_ticket`
 --
 
@@ -119,17 +145,19 @@ CREATE TABLE `detalle_ticket` (
   `ID_DETALLE_TICKET` int(11) NOT NULL,
   `ID_PRODUCTO` int(11) DEFAULT NULL,
   `CANTIDAD` int(11) DEFAULT NULL,
-  `PRECIO_UNITARIO` decimal(10,2) DEFAULT NULL
+  `PRECIO_UNITARIO` decimal(10,2) DEFAULT NULL,
+  `PRECIO_TOTAL` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `detalle_ticket`
 --
 
-INSERT INTO `detalle_ticket` (`ID_DETALLE_TICKET`, `ID_PRODUCTO`, `CANTIDAD`, `PRECIO_UNITARIO`) VALUES
-(1, 1, 1, 250.00),
-(2, 3, 2, 30.00),
-(3, 6, 3, 150.00);
+INSERT INTO `detalle_ticket` (`ID_DETALLE_TICKET`, `ID_PRODUCTO`, `CANTIDAD`, `PRECIO_UNITARIO`, `PRECIO_TOTAL`) VALUES
+(1, 1, 1, 250.00, 0),
+(2, 3, 2, 30.00, 0),
+(3, 6, 3, 150.00, 0),
+(4, 1, 3, 23.00, 69);
 
 -- --------------------------------------------------------
 
@@ -177,6 +205,33 @@ INSERT INTO `lista_de_deseos` (`ID_LISTA_DE_DESEOS`, `ID_USUARIO`, `ID_PRODUCTO`
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pedidos`
+--
+
+CREATE TABLE `pedidos` (
+  `ID_PEDIDO` int(11) NOT NULL,
+  `ID_CLIENTE` int(11) NOT NULL,
+  `FECHA` datetime NOT NULL DEFAULT current_timestamp(),
+  `TOTAL` decimal(10,2) NOT NULL DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`ID_PEDIDO`, `ID_CLIENTE`, `FECHA`, `TOTAL`) VALUES
+(1, 1, '2024-12-11 02:37:56', 80.00),
+(2, 2, '2024-12-09 02:37:56', 50.00),
+(3, 1, '2024-12-11 02:37:56', 80.00),
+(4, 2, '2024-12-09 02:37:56', 50.00),
+(5, 1, '2024-12-01 02:42:45', 174.00),
+(6, 2, '2024-12-01 03:08:40', 92.00),
+(7, 2, '2024-12-01 03:41:11', 80.00),
+(8, 1, '2024-12-01 03:43:20', 310.00);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `producto`
 --
 
@@ -207,6 +262,40 @@ INSERT INTO `producto` (`ID_PRODUCTO`, `NOMBRE`, `COSTO`, `FECHA_CADUCIDAD`, `ID
 (10, 'Angel food', 100.00, '2024-11-23', 1, 'Este tipo de pastel consiguió su nombre gracias a que tiene una textura aireada y suave, digna de los ángeles.', '10.jpg'),
 (11, 'Pastel de zanahoria', 140.00, '2024-11-22', 1, 'Una receta que combina perfectamente sabores como la canela, nuez moscada, clavo, piña, coco, nueces, chocolate, higos, jengibre cristalizado y algunas frutas deshidratadas.', '11.jpg'),
 (12, 'Pasteles de natilla', 180.00, '2024-11-23', 1, 'Este tipo de pasteles requiere de la preparación de una natilla o crema espesa que pueda cocinarse en baño maría o en el horno a una temperatura media-baja, algunos de los más famosos son los pasteles de queso o cheesecakes. ', '12.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `productos`
+--
+
+CREATE TABLE `productos` (
+  `ID_PRODUCTO` int(11) NOT NULL,
+  `NOMBRE` varchar(100) DEFAULT NULL,
+  `COSTO` decimal(10,2) DEFAULT NULL,
+  `FECHA_CADUCIDAD` date DEFAULT NULL,
+  `ID_CATEGORIA` int(11) DEFAULT NULL,
+  `DESCRIPCION` text DEFAULT NULL,
+  `IMAGEN` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`ID_PRODUCTO`, `NOMBRE`, `COSTO`, `FECHA_CADUCIDAD`, `ID_CATEGORIA`, `DESCRIPCION`, `IMAGEN`) VALUES
+(1, 'Pastel de Chocolate', 250.00, '2024-12-31', 1, 'Delicioso pastel de chocolate con cobertura de ganache.', '1.jpg'),
+(2, 'Galletas de Avena', 50.00, '2025-01-15', 2, 'Crujientes galletas de avena con pasas.', '2.jpg'),
+(3, 'Pan de Muerto', 30.00, '2024-11-30', 3, 'Tradicional pan de muerto, suave y esponjoso.', '3.jpg'),
+(4, 'Helado de Vainilla', 100.00, '2025-03-01', 4, 'Helado artesanal de vainilla, sin conservadores.', '4.jpg'),
+(5, 'Tarta de Frutas', 200.00, '2024-12-15', 1, 'Tarta fresca con frutas de temporada.', '5.jpg'),
+(6, 'Macarons', 150.00, '2025-01-01', 2, 'Coloridos macarons franceses con relleno de crema.', '6.jpg'),
+(7, 'Rosca de Reyes', 300.00, '2024-12-31', 3, 'Rosca de reyes tradicional, con frutas confitadas.', '7.jpg'),
+(8, 'Gelatina de Fresa', 40.00, '2025-02-28', 4, 'Gelatina casera de fresa con trozos de fruta.', '8.jpg'),
+(9, 'Dacquoise', 150.00, '2024-11-22', 1, 'Es también conocido como pastel de merengue japonés.', '9.jpg'),
+(10, 'Angel food', 100.00, '2024-11-23', 1, 'Este tipo de pastel consiguió su nombre gracias a su textura ligera.', '10.jpg'),
+(11, 'Pastel de zanahoria', 140.00, '2024-11-22', 1, 'Una receta que combina perfectamente sabores como la zanahoria y la canela.', '11.jpg'),
+(12, 'Pasteles de natilla', 180.00, '2024-11-23', 1, 'Este tipo de pasteles requiere de la preparación de natillas suaves y cremosas.', '12.jpg');
 
 -- --------------------------------------------------------
 
@@ -257,7 +346,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`ID_USUARIO`, `NOMBRE`, `APELLIDO`, `DIRECCION`, `ID_CIUDAD`, `ID_GENERO`, `RFC`, `TELEFONO`, `EMAIL`, `CONTRASENA`) VALUES
-(1, 'Juan', 'Pérez', 'Av. Revolución 456, Ciudad de México', 1, 1, 'JUP123456XYZ', '5512345678', 'juan.perez@gmail.com', '1234'),
+(1, 'Juan', 'Pérez', 'Av. Revolución 456, Ciudad de México', 1, 1, 'JUP123456XYZ', '5512345678', 'juanperez@gmail.com', '1234'),
 (2, 'María', 'González', 'Calle Hidalgo 789, Guadalajara', 2, 2, 'MAG890123ABC', '3335678901', 'maria.gonzalez@yahoo.com', '5678');
 
 -- --------------------------------------------------------
@@ -275,16 +364,18 @@ CREATE TABLE `vendedor` (
   `ID_GENERO` int(11) DEFAULT NULL,
   `RFC` varchar(13) DEFAULT NULL,
   `TELEFONO` varchar(15) DEFAULT NULL,
-  `ID_SUCURSAL` int(11) DEFAULT NULL
+  `ID_SUCURSAL` int(11) DEFAULT NULL,
+  `CORREO` varchar(100) NOT NULL,
+  `CONTRASENA` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `vendedor`
 --
 
-INSERT INTO `vendedor` (`ID_VENDEDOR`, `NOMBRE`, `APELLIDO`, `DIRECCION`, `ID_CIUDAD`, `ID_GENERO`, `RFC`, `TELEFONO`, `ID_SUCURSAL`) VALUES
-(1, 'Carlos', 'Ramírez', 'Calle Reforma 123, Monterrey', 3, 1, 'CAR780912XYZ', '8182345678', 2),
-(2, 'Lucía', 'Martínez', 'Blvd. Vallejo 456, Ciudad de México', 1, 2, 'LUM650823ABC', '5556789012', 1);
+INSERT INTO `vendedor` (`ID_VENDEDOR`, `NOMBRE`, `APELLIDO`, `DIRECCION`, `ID_CIUDAD`, `ID_GENERO`, `RFC`, `TELEFONO`, `ID_SUCURSAL`, `CORREO`, `CONTRASENA`) VALUES
+(1, 'Carlos', 'Ramírez', 'Calle Reforma 123, Monterrey', 3, 1, 'CAR780912XYZ', '8182345678', 2, 'carlos@gmail.com', '1234'),
+(2, 'Lucía', 'Martínez', 'Blvd. Vallejo 456, Ciudad de México', 1, 2, 'LUM650823ABC', '5556789012', 1, 'luciamartines@gmail', '');
 
 -- --------------------------------------------------------
 
@@ -340,6 +431,14 @@ ALTER TABLE `descuento`
   ADD PRIMARY KEY (`ID_DESCUENTO`);
 
 --
+-- Indices de la tabla `detalle_pedido`
+--
+ALTER TABLE `detalle_pedido`
+  ADD PRIMARY KEY (`ID_DETALLE_PEDIDO`),
+  ADD KEY `ID_PEDIDO` (`ID_PEDIDO`),
+  ADD KEY `ID_PRODUCTO` (`ID_PRODUCTO`);
+
+--
 -- Indices de la tabla `detalle_ticket`
 --
 ALTER TABLE `detalle_ticket`
@@ -361,11 +460,23 @@ ALTER TABLE `lista_de_deseos`
   ADD KEY `ID_PRODUCTO` (`ID_PRODUCTO`);
 
 --
+-- Indices de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`ID_PEDIDO`);
+
+--
 -- Indices de la tabla `producto`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`ID_PRODUCTO`),
   ADD KEY `ID_CATEGORIA` (`ID_CATEGORIA`);
+
+--
+-- Indices de la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`ID_PRODUCTO`);
 
 --
 -- Indices de la tabla `sucursal`
@@ -429,10 +540,16 @@ ALTER TABLE `descuento`
   MODIFY `ID_DESCUENTO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `detalle_pedido`
+--
+ALTER TABLE `detalle_pedido`
+  MODIFY `ID_DETALLE_PEDIDO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `detalle_ticket`
 --
 ALTER TABLE `detalle_ticket`
-  MODIFY `ID_DETALLE_TICKET` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_DETALLE_TICKET` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `genero`
@@ -447,9 +564,21 @@ ALTER TABLE `lista_de_deseos`
   MODIFY `ID_LISTA_DE_DESEOS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `ID_PEDIDO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
+  MODIFY `ID_PRODUCTO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `productos`
+--
+ALTER TABLE `productos`
   MODIFY `ID_PRODUCTO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
@@ -462,7 +591,7 @@ ALTER TABLE `sucursal`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `ID_USUARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID_USUARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `vendedor`
@@ -488,6 +617,13 @@ ALTER TABLE `cabecera_ticket`
   ADD CONSTRAINT `cabecera_ticket_ibfk_2` FOREIGN KEY (`ID_VENDEDOR`) REFERENCES `vendedor` (`ID_VENDEDOR`),
   ADD CONSTRAINT `cabecera_ticket_ibfk_3` FOREIGN KEY (`ID_USUARIO`) REFERENCES `usuario` (`ID_USUARIO`),
   ADD CONSTRAINT `cabecera_ticket_ibfk_4` FOREIGN KEY (`ID_DESCUENTO`) REFERENCES `descuento` (`ID_DESCUENTO`);
+
+--
+-- Filtros para la tabla `detalle_pedido`
+--
+ALTER TABLE `detalle_pedido`
+  ADD CONSTRAINT `detalle_pedido_ibfk_1` FOREIGN KEY (`ID_PEDIDO`) REFERENCES `pedidos` (`ID_PEDIDO`),
+  ADD CONSTRAINT `detalle_pedido_ibfk_2` FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `productos` (`ID_PRODUCTO`);
 
 --
 -- Filtros para la tabla `detalle_ticket`
