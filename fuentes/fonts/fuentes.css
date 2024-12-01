@@ -1,0 +1,68 @@
+@charset "utf-8";
+/* CSS Document */
+@font-face{
+	font-family: 'Fornire-Light';
+	src:url("fuente/fornire/Fornire-Light.otf");
+	font-style:normal;
+	font-weight: normal;
+}
+
+.titulo1{
+	font-family: 'Fornire-Light';
+	font-style: normal;
+	font-weight: normal;
+}
+
+
+@font-face{
+	font-family: 'ABitEmpty';
+	src:url("fuente/a_bit_empty/ABitEmpty.ttf");
+	font-style:normal;
+	font-weight: normal;
+}
+
+.titulo2{
+	font-family: 'ABitEmpty';
+	font-style: normal;
+	font-weight: normal;
+}
+
+
+@font-face{
+	font-family: 'aBigDeal';
+	src:url("fuente/a_big_deal/aBigDeal.ttf");
+	font-style:normal;
+	font-weight: normal;
+}
+
+.titulo3{
+	font-family: 'aBigDeal';
+	font-style: normal;
+	font-weight: normal;
+}
+
+@font-face{
+	font-family: 'bajawa';
+	src:url("fuente/bajawa/Bajawa.ttf");
+	font-style:normal;
+	font-weight: normal;
+}
+
+.titulo4{
+	font-family: 'Bajawa';
+	font-style: normal;
+	font-weight: normal;
+}
+
+@font-face{
+	font-family: 'Ubahn';
+	src:url("fuente/Ubahn/Ubahn.ttf");
+	font-style:normal;
+	font-weight: normal;
+}
+
+.titulo5{ 
+	font-family: 'Ubahn';
+	font-style: normal;
+	font-weight: normal;
+}
