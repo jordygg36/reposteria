@@ -121,7 +121,7 @@
                     echo "<h5>$nombre</h5>";
                     echo "<p>$descripcion</p>";
                     echo "<p><strong>Costo:</strong> $$costo</p>";
-                    //echo "<button class='btn btn-primary'>Comprar</button>";
+                    echo "<button class='btn btn-primary'><a href='/reposteria/vista/carrito.php''>Comprar</a></button>";
                     echo "</div>";
                 }
                 
