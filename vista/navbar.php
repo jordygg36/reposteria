@@ -42,7 +42,7 @@
             font-size: 20px;
             font-weight: bold;
         }
-
+        
         /* Enlaces alineados a la derecha */
         .navbar .links {
             display: flex;
@@ -68,7 +68,7 @@
         }
         .iconos{
             font-size: 2rem;
-            color: blue;
+            color: white;
 
         }
     </style>
@@ -81,9 +81,9 @@
         <div class="links">
             <a href="../vista/inicioPrincipal.php">Inicio</a>
             <a href="/reposteria/controlador/controladorBuscarProducto.php">Menu</a>
-            <a href="/reposteria/controlador/controladorLoginVendedor.php">Iniciar secion</a>
+            <a href="/reposteria/controlador/controladorLoginVendedor.php">Iniciar sesión</a>
             <div class="icon">
-                <i class="bi bi-cart4 iconos"></i>
+                <a href="/reposteria/vista/carrito.php"><i class="bi bi-cart4 iconos"></i></a>
             </div>
         </div>
     </div>
