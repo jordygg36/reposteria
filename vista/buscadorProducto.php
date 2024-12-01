@@ -41,6 +41,8 @@
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
+            margin-top: 20px;
+
         }
 
         .product-container {
