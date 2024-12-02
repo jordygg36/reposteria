@@ -9,34 +9,23 @@
     <link href="/reposteria/css/base.css" rel="stylesheet" type="text/css">
     <link href="/reposteria/css/buscadorProducto.css" rel="stylesheet" type="text/css">
     <?php
-    require_once("navbar.php");
+    
+    require_once $_SERVER['DOCUMENT_ROOT']."/reposteria/config/connect_db.php";
+    require_once $_SERVER['DOCUMENT_ROOT']."/reposteria/modelo/modeloProductoInicio.php";
+
+    $productos = new modeloBuscadorProducto();
     ?>
     
 </head>
-<?php
-require_once("navbar.php");
-?>
+
 
 <body>
-    <div class="container">
-        <!-- Contenedor del buscador -->
-        <div class="search-container">
-            <h3 class="text-center">Buscador de Productos</h3>
-            <form method="post">
-                <input class="form-control mb-3" name="txt_criterio" type="text" placeholder="Escribe el nombre del producto" autofocus>
-                <div class="text-center">
-                    <button name="btn_buscar" type="submit" class="btn btn-primary">Buscar</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Contenedor de los productos -->
-        <div>
+  
             <?php
-            if (isset($_POST["btn_buscar"])) {
+
                 $productos = new modeloBuscadorProducto();
                 $data["productos"] = $productos->resultadosProductos();
-
+                
                 echo "<div class='product-container'>";
 
                 foreach ($data["productos"] as $dato) {
@@ -57,13 +46,11 @@ require_once("navbar.php");
                 }
 
                 echo "</div>";
-            }
+            
             ?>
         </div>
     </div>
 </body>
-<?php
-require_once("piepagina.php");
-?>
+
 
 </html>

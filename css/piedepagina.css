@@ -1,0 +1,97 @@
+/* Asegúrate de que el contenedor principal ocupe toda la altura de la pantalla */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Contenedor principal */
+.container {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Contenido de la página, empuja el footer hacia abajo */
+.content {
+    flex: 1;
+}
+
+/* Estilos del pie de página */
+.footer {
+    background-color: #8f3d38; /* Color de fondo */
+    color: #fff; /* Color de texto */
+    padding: 40px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-shrink: 0; /* Asegura que el footer no se reduzca */
+}
+
+.footer .footer-section {
+    flex: 1;
+    margin: 10px;
+    min-width: 250px;
+}
+
+.footer h4 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #efb810;
+    text-transform: uppercase;
+}
+
+.footer p,
+.footer a {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.6;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #efb810;
+    text-decoration: underline;
+}
+
+.footer .social-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.footer .social-icons a {
+    color: #fff;
+    background-color: #444;
+    padding: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.footer .social-icons a:hover {
+    background-color: #efb810;
+    transform: scale(1.1);
+}
+
+.footer .copy {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #bbb;
+}
+
+/* Estilo adaptable */
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer .footer-section {
+        margin-bottom: 20px;
+    }
+
+    .footer .social-icons {
+        justify-content: center;
+    }
+}

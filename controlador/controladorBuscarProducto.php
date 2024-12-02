@@ -5,4 +5,5 @@ require_once $_SERVER['DOCUMENT_ROOT']."/reposteria/modelo/modeloBuscadorProduct
 
 $productos = new modeloBuscadorProducto();
 require_once $_SERVER['DOCUMENT_ROOT']."/reposteria/vista/buscadorProducto.php";
+
 ?>
